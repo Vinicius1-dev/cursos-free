@@ -18,11 +18,11 @@
     <meta property="og:image" content="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=82" />
     <link rel="icon" href="data:," />
     <link rel="manifest" href="manifest.webmanifest" />
-    <link rel="stylesheet" href="styles.css?v=8" />
+    <link rel="stylesheet" href="styles.css?v=9" />
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <script src="course-data.js?v=8" defer></script>
-    <script src="api-client.js?v=8" defer></script>
-    <script src="script.js?v=8" defer></script>
+    <script src="course-data.js?v=9" defer></script>
+    <script src="api-client.js?v=9" defer></script>
+    <script src="script.js?v=9" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#catalogo">Pular para os cursos</a>
@@ -46,8 +46,8 @@
           Entrar
         </button>
         <button class="primary-button" type="button" id="startAuthButton" data-auth-open="signup">
-          <i data-lucide="play-circle" aria-hidden="true"></i>
-          Começar
+          <i data-lucide="user-plus" aria-hidden="true"></i>
+          Criar conta
         </button>
         <div class="user-menu" id="userMenu" hidden>
           <button class="user-menu-trigger" type="button" id="userMenuButton" aria-haspopup="menu" aria-expanded="false">
@@ -366,6 +366,11 @@
               <i data-lucide="log-in" aria-hidden="true"></i>
               Entrar
             </button>
+
+            <div class="auth-switch">
+              <span id="authSwitchText">Ainda não tem conta?</span>
+              <button class="ghost-button" type="button" id="authSwitchButton">Criar conta</button>
+            </div>
           </form>
         </div>
       </article>

@@ -317,6 +317,8 @@ const authPassword = document.querySelector("#authPassword");
 const authConfirmPassword = document.querySelector("#authConfirmPassword");
 const authSubmit = document.querySelector("#authSubmit");
 const authMessage = document.querySelector("#authMessage");
+const authSwitchText = document.querySelector("#authSwitchText");
+const authSwitchButton = document.querySelector("#authSwitchButton");
 const nameField = document.querySelector("#nameField");
 const confirmField = document.querySelector("#confirmField");
 const learningModal = document.querySelector("#learningModal");
@@ -501,6 +503,9 @@ function setAuthMode(mode) {
     <i data-lucide="${signup ? "user-plus" : "log-in"}" aria-hidden="true"></i>
     ${signup ? "Criar conta" : "Entrar"}
   `;
+  authSwitchText.textContent = signup ? "Já tem uma conta?" : "Ainda não tem conta?";
+  authSwitchButton.textContent = signup ? "Entrar" : "Criar conta";
+  authSwitchButton.setAttribute("aria-label", signup ? "Ir para login" : "Ir para criar conta");
 
   nameField.hidden = !signup;
   confirmField.hidden = !signup;
@@ -1282,6 +1287,10 @@ logoutButton.addEventListener("click", logout);
 
 authTabs.forEach((tab) => {
   tab.addEventListener("click", () => setAuthMode(tab.dataset.authMode));
+});
+
+authSwitchButton.addEventListener("click", () => {
+  setAuthMode(state.authMode === "signup" ? "login" : "signup");
 });
 
 authClose.addEventListener("click", () => closeAuthModal());

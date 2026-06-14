@@ -1478,6 +1478,27 @@ button:disabled {
   width: 100%;
 }
 
+.auth-switch {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2px;
+  padding: 10px;
+  color: var(--muted);
+  background: #f7f9fc;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.auth-switch .ghost-button {
+  min-height: 38px;
+  padding-inline: 14px;
+  white-space: nowrap;
+}
+
 .auth-submit.is-loading {
   opacity: 0.86;
   pointer-events: none;
@@ -1702,6 +1723,7 @@ body.theme-dark .how-card,
 body.theme-dark .track-card,
 body.theme-dark .faq-grid article,
 body.theme-dark .auth-note,
+body.theme-dark .auth-switch,
 body.theme-dark .empty-state,
 body.theme-dark .course-modal,
 body.theme-dark .panel-modal,
@@ -1920,6 +1942,14 @@ body.catalog-compact .course-actions {
   .header-actions .primary-button,
   .user-menu {
     flex: 1 1 0;
+  }
+
+  .auth-switch {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-switch .ghost-button {
+    width: 100%;
   }
 
   .user-menu {
