@@ -1,0 +1,11 @@
+{
+  "name": "IniciaDev",
+  "short_name": "IniciaDev",
+  "description": "Cursos guiados para quem está começando uma nova habilidade.",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#f4f7fb",
+  "theme_color": "#2557d6",
+  "lang": "pt-BR",
+  "icons": []
+}

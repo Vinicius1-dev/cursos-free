@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Curso | IniciaDev</title>
+    <meta name="description" content="Sala de aula do IniciaDev com vídeos, leitura guiada, prática e progresso do curso." />
+    <meta name="theme-color" content="#2557d6" />
+    <link rel="icon" href="data:," />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="styles.css?v=8" />
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="course-data.js?v=8" defer></script>
+    <script src="api-client.js?v=8" defer></script>
+    <script src="course-page.js?v=8" defer></script>
+  </head>
+  <body class="lesson-page">
+    <header class="lesson-header">
+      <a class="brand" href="index.html#catalogo" aria-label="IniciaDev">
+        <span class="brand-mark">ID</span>
+        <span>IniciaDev</span>
+      </a>
+
+      <nav class="lesson-nav" aria-label="Navegação da aula">
+        <a href="index.html#catalogo">
+          <i data-lucide="arrow-left" aria-hidden="true"></i>
+          Catálogo
+        </a>
+        <span id="lessonUser">Visitante</span>
+      </nav>
+    </header>
+
+    <main class="classroom-shell" id="classroomShell">
+      <section class="classroom-main">
+        <div class="classroom-eyebrow" id="courseProvider"></div>
+        <h1 id="courseTitle">Carregando curso...</h1>
+        <p class="classroom-copy" id="courseDescription"></p>
+
+        <div class="classroom-player">
+          <iframe
+            id="lessonVideo"
+            title="Aula"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+
+        <div class="lesson-summary">
+          <div>
+            <p class="eyebrow">Aula atual</p>
+            <h2 id="lessonTitle">Aula</h2>
+            <p id="lessonObjective"></p>
+          </div>
+          <button class="primary-button" type="button" id="completeLessonButton">
+            <i data-lucide="check-circle" aria-hidden="true"></i>
+            Concluir aula
+          </button>
+        </div>
+
+        <section class="reading-panel" aria-labelledby="readingTitle">
+          <div class="reading-heading">
+            <div>
+              <p class="eyebrow">Leitura guiada</p>
+              <h2 id="readingTitle">Entenda antes de praticar</h2>
+            </div>
+            <span id="readingModule"></span>
+          </div>
+          <p id="readingText"></p>
+          <ul class="reading-points" id="readingPoints"></ul>
+          <div class="practice-box">
+            <strong>Prática rápida</strong>
+            <p id="practiceText"></p>
+          </div>
+          <a class="ghost-button extra-video-link" id="extraVideoLink" href="#" target="_blank" rel="noopener">
+            <i data-lucide="play-circle" aria-hidden="true"></i>
+            Mais vídeos sobre esta aula
+          </a>
+        </section>
+
+        <section class="project-workshop" aria-labelledby="projectTitle">
+          <div>
+            <p class="eyebrow">Projeto final</p>
+            <h2 id="projectTitle">Prática do curso</h2>
+            <p id="projectText"></p>
+          </div>
+          <button class="ghost-button" type="button" id="enrollButton">
+            <i data-lucide="bookmark-plus" aria-hidden="true"></i>
+            Matricular-se
+          </button>
+        </section>
+      </section>
+
+      <aside class="classroom-sidebar" aria-label="Módulos do curso">
+        <div class="progress-panel">
+          <div class="progress-heading">
+            <span>Progresso</span>
+            <strong id="progressPercent">0%</strong>
+          </div>
+          <div class="progress-track" aria-hidden="true">
+            <span id="progressBar"></span>
+          </div>
+          <p id="progressMessage">Comece pela primeira aula.</p>
+        </div>
+
+        <div class="module-panel">
+          <div class="lesson-panel-heading">
+            <p class="eyebrow">Módulos</p>
+            <span id="lessonCount"></span>
+          </div>
+          <div class="classroom-lessons" id="classroomLessons"></div>
+        </div>
+      </aside>
+    </main>
+
+    <section class="course-not-found" id="courseNotFound" hidden>
+      <i data-lucide="triangle-alert" aria-hidden="true"></i>
+      <h1>Curso não encontrado</h1>
+      <p>Volte ao catálogo e escolha uma trilha disponível.</p>
+      <a class="primary-button" href="index.html#catalogo">
+        <i data-lucide="arrow-left" aria-hidden="true"></i>
+        Voltar ao catálogo
+      </a>
+    </section>
+    <section class="course-not-found" id="courseLocked" hidden>
+      <i data-lucide="lock" aria-hidden="true"></i>
+      <h1>Matricule-se para acessar este curso</h1>
+      <p>Abra os detalhes no catálogo, confirme a matrícula e depois continue pela sala de aula.</p>
+      <a class="primary-button" href="index.html#catalogo">
+        <i data-lucide="arrow-left" aria-hidden="true"></i>
+        Voltar ao catálogo
+      </a>
+    </section>
+  </body>
+</html>

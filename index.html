@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IniciaDev | Cursos para Começar uma Nova Habilidade</title>
+    <meta
+      name="description"
+      content="Cursos gratuitos e guiados para começar em programação, IA, marketing, finanças, idiomas, design, concursos e negócios com trilhas, vídeos e prática."
+    />
+    <meta name="theme-color" content="#2557d6" />
+    <meta property="og:title" content="IniciaDev | Cursos para Começar uma Nova Habilidade" />
+    <meta
+      property="og:description"
+      content="Uma plataforma com cursos curados, plano de estudo, vídeos, leitura guiada e progresso para quem está começando."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=82" />
+    <link rel="icon" href="data:," />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="styles.css?v=8" />
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="course-data.js?v=8" defer></script>
+    <script src="api-client.js?v=8" defer></script>
+    <script src="script.js?v=8" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#catalogo">Pular para os cursos</a>
+    <header class="site-header">
+      <a class="brand" href="#" aria-label="IniciaDev">
+        <span class="brand-mark">ID</span>
+        <span>IniciaDev</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Navegação principal">
+        <a href="#plano">Plano</a>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#trilhas">Trilhas</a>
+        <a href="#comunidade">Comunidade</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="ghost-button" type="button" id="openAuthButton" data-auth-open="login">
+          <i data-lucide="log-in" aria-hidden="true"></i>
+          Entrar
+        </button>
+        <button class="primary-button" type="button" id="startAuthButton" data-auth-open="signup">
+          <i data-lucide="play-circle" aria-hidden="true"></i>
+          Começar
+        </button>
+        <div class="user-menu" id="userMenu" hidden>
+          <button class="user-menu-trigger" type="button" id="userMenuButton" aria-haspopup="menu" aria-expanded="false">
+            <span class="user-avatar" id="userInitials">ID</span>
+            <span class="user-name" id="userGreeting">Olá</span>
+            <i data-lucide="chevron-down" aria-hidden="true"></i>
+          </button>
+          <div class="account-dropdown" id="accountDropdown" role="menu" hidden>
+            <button type="button" id="openLearningButton" role="menuitem">
+              <i data-lucide="book-open-check" aria-hidden="true"></i>
+              Seus aprendizados
+            </button>
+            <button type="button" id="openSettingsButton" role="menuitem">
+              <i data-lucide="settings" aria-hidden="true"></i>
+              Configurações
+            </button>
+            <button type="button" id="logoutButton" role="menuitem">
+              <i data-lucide="log-out" aria-hidden="true"></i>
+              Sair
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="catalog-hero" aria-labelledby="hero-title">
+        <div class="hero-content">
+          <p class="eyebrow">Aprendizado guiado para quem está no começo</p>
+          <h1 id="hero-title">Cursos para aprender habilidades que mudam sua rotina.</h1>
+          <p class="hero-copy">
+            Programação, IA, marketing, finanças, idiomas, design, concursos e negócios em trilhas práticas.
+          </p>
+
+          <div class="hero-proof" aria-label="Destaques da plataforma">
+            <span><i data-lucide="book-open-check" aria-hidden="true"></i> Plano guiado</span>
+            <span><i data-lucide="play-circle" aria-hidden="true"></i> Vídeos curados</span>
+            <span><i data-lucide="check-circle" aria-hidden="true"></i> Progresso salvo</span>
+          </div>
+
+          <form class="hero-search" role="search" aria-label="Buscar cursos">
+            <i data-lucide="search" aria-hidden="true"></i>
+            <input id="searchInput" type="search" placeholder="Buscar curso, área ou habilidade" />
+            <button type="button" id="clearSearch" title="Limpar busca" aria-label="Limpar busca">
+              <i data-lucide="x" aria-hidden="true"></i>
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <section class="study-plan-section" id="plano" aria-labelledby="studyPlanTitle">
+        <div class="study-plan-panel">
+          <div class="study-plan-copy">
+            <p class="eyebrow">Plano de estudo</p>
+            <h2 id="studyPlanTitle">Uma sequência segura para sair do zero</h2>
+            <p id="studyPlanCopy">
+              Comece pela base, avance para projetos e mantenha uma rotina possível de terminar.
+            </p>
+            <div class="study-plan-actions">
+              <a class="primary-button" id="studyPlanPrimary" href="curso.html?id=logica-programacao" target="_blank" rel="noopener">
+                <i data-lucide="play-circle" aria-hidden="true"></i>
+                Começar pelo primeiro passo
+              </a>
+              <a class="ghost-button" href="#catalogo">
+                <i data-lucide="search" aria-hidden="true"></i>
+                Ver catálogo
+              </a>
+            </div>
+          </div>
+
+          <div class="study-plan-stats" id="studyPlanStats" aria-label="Resumo do plano"></div>
+        </div>
+
+        <div class="study-path" id="studyPath" aria-label="Sequência recomendada"></div>
+      </section>
+
+      <section class="catalog-section" id="catalogo" aria-label="Catálogo de cursos">
+        <div class="catalog-count-row">
+          <div class="catalog-meta" aria-live="polite">
+            <strong id="courseCount">0</strong>
+            <span>cursos encontrados</span>
+          </div>
+        </div>
+
+        <div class="course-grid" id="courseGrid" aria-live="polite"></div>
+      </section>
+
+      <section class="how-section" id="como-funciona" aria-labelledby="how-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Como funciona</p>
+            <h2 id="how-title">Do clique inicial até a prática</h2>
+          </div>
+        </div>
+
+        <div class="how-grid">
+          <article class="how-card">
+            <span>1</span>
+            <i data-lucide="search" aria-hidden="true"></i>
+            <h3>Escolha e matricule-se</h3>
+            <p>Abra os detalhes do curso, veja a trilha, o projeto final e confirme a matrícula antes de acessar a sala.</p>
+          </article>
+
+          <article class="how-card">
+            <span>2</span>
+            <i data-lucide="book-open" aria-hidden="true"></i>
+            <h3>Estude com vídeo e leitura</h3>
+            <p>Cada aula combina vídeo do YouTube, explicação guiada, pontos para anotar e uma prática rápida.</p>
+          </article>
+
+          <article class="how-card">
+            <span>3</span>
+            <i data-lucide="check-circle" aria-hidden="true"></i>
+            <h3>Acompanhe seu progresso</h3>
+            <p>O site mostra seus aprendizados, aulas concluídas e próximos passos do plano de estudo.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="tracks-section" id="trilhas" aria-labelledby="tracks-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Trilhas recomendadas</p>
+            <h2 id="tracks-title">Roteiros prontos para aprender com sequência</h2>
+          </div>
+        </div>
+
+        <div class="track-grid">
+          <article class="track-card">
+            <i data-lucide="code-2" aria-hidden="true"></i>
+            <h3>Carreira digital</h3>
+            <p>Programação, IA, portfólio e ferramentas para criar projetos reais.</p>
+            <span>4 áreas · trilhas práticas</span>
+          </article>
+
+          <article class="track-card">
+            <i data-lucide="megaphone" aria-hidden="true"></i>
+            <h3>Criador e negócios</h3>
+            <p>Marketing, design, edição de vídeo e empreendedorismo para vender melhor.</p>
+            <span>4 áreas · projetos aplicados</span>
+          </article>
+
+          <article class="track-card">
+            <i data-lucide="graduation-cap" aria-hidden="true"></i>
+            <h3>Vida e estudos</h3>
+            <p>Finanças, idiomas e preparação para concursos com rotina clara.</p>
+            <span>3 áreas · evolução constante</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="faq-section" aria-labelledby="faq-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Dúvidas rápidas</p>
+            <h2 id="faq-title">Transparência para o aluno</h2>
+          </div>
+        </div>
+
+        <div class="faq-grid">
+          <article>
+            <h3>Os vídeos são do IniciaDev?</h3>
+            <p>Os vídeos são curados do YouTube. O IniciaDev organiza a sequência, leitura, prática e progresso em volta deles.</p>
+          </article>
+          <article>
+            <h3>Preciso me matricular?</h3>
+            <p>Sim. A matrícula libera a sala de aula e salva o curso em “Seus aprendizados”.</p>
+          </article>
+          <article>
+            <h3>Minha conta fica salva onde?</h3>
+            <p>As contas usam backend com banco SQLite, senha protegida por hash e sessão segura por cookie HttpOnly.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="community-section" id="comunidade" aria-labelledby="community-title">
+        <div>
+          <p class="eyebrow">Comunidade</p>
+          <h2 id="community-title">Aprender fica mais leve com rotina e feedback.</h2>
+          <p>
+            Encontros semanais, revisão de projetos e desafios de portfólio ajudam cada aluno a manter ritmo.
+          </p>
+        </div>
+        <a class="primary-button" href="#catalogo">
+          <i data-lucide="book-open-check" aria-hidden="true"></i>
+          Explorar cursos
+        </a>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <a class="brand" href="#" aria-label="IniciaDev">
+          <span class="brand-mark">ID</span>
+          <span>IniciaDev</span>
+        </a>
+        <p>Aprendizado guiado para quem está começando, com trilhas práticas e conteúdo curado.</p>
+      </div>
+      <nav aria-label="Links do rodapé">
+        <a href="#plano">Plano</a>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#comunidade">Comunidade</a>
+      </nav>
+    </footer>
+
+    <div class="modal-backdrop" id="courseModal" hidden>
+      <article class="course-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="icon-button modal-close" type="button" id="modalClose" title="Fechar" aria-label="Fechar">
+          <i data-lucide="x" aria-hidden="true"></i>
+        </button>
+        <img id="modalImage" alt="" />
+        <div class="modal-body">
+          <p class="eyebrow" id="modalProvider"></p>
+          <h2 id="modalTitle"></h2>
+          <p id="modalDescription"></p>
+          <div class="modal-stats" id="modalStats"></div>
+          <div class="learning-preview">
+            <div class="video-preview" id="modalVideoPreview"></div>
+            <div class="lesson-panel">
+              <div class="lesson-panel-heading">
+                <p class="eyebrow">Plano do curso</p>
+                <span id="modalLessonCount"></span>
+              </div>
+              <ol class="lesson-list" id="modalLessons"></ol>
+            </div>
+          </div>
+          <div class="project-box" id="modalProject"></div>
+          <div class="modal-actions">
+            <button class="primary-button" type="button" id="modalEnroll">
+              <i data-lucide="check-circle" aria-hidden="true"></i>
+              Matricular-se
+            </button>
+            <button class="ghost-button" type="button" id="modalSave">
+              <i data-lucide="bookmark" aria-hidden="true"></i>
+              Salvar
+            </button>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="modal-backdrop" id="authModal" hidden>
+      <article class="auth-modal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+        <button class="icon-button modal-close" type="button" id="authClose" title="Fechar" aria-label="Fechar">
+          <i data-lucide="x" aria-hidden="true"></i>
+        </button>
+
+        <div class="auth-visual" aria-hidden="true">
+          <div class="study-orbit">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="code-window">
+            <div class="code-header">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class="code-lines">
+              <span class="code-line wide"></span>
+              <span class="code-line medium"></span>
+              <span class="code-line short"></span>
+              <span class="code-line wide"></span>
+            </div>
+            <div class="study-progress">
+              <span></span>
+            </div>
+          </div>
+          <div class="floating-badge badge-one">
+            <i data-lucide="terminal-square" aria-hidden="true"></i>
+          </div>
+          <div class="floating-badge badge-two">
+            <i data-lucide="play" aria-hidden="true"></i>
+          </div>
+        </div>
+
+        <div class="auth-panel">
+          <p class="eyebrow" id="authEyebrow">Conta</p>
+          <h2 id="authTitle">Entre para continuar</h2>
+          <p class="auth-copy" id="authCopy">Acesse sua conta para salvar cursos e acompanhar suas matrículas.</p>
+          <p class="auth-note">
+            Sua conta, matrículas e progresso ficam salvos no banco de dados do IniciaDev.
+          </p>
+
+          <div class="auth-tabs" role="tablist" aria-label="Entrar ou criar conta">
+            <button class="auth-tab active" type="button" data-auth-mode="login">Entrar</button>
+            <button class="auth-tab" type="button" data-auth-mode="signup">Criar conta</button>
+          </div>
+
+          <form class="auth-form" id="authForm" novalidate>
+            <div class="field-group" id="nameField" hidden>
+              <label for="authName">Nome</label>
+              <input id="authName" name="name" type="text" autocomplete="name" />
+            </div>
+
+            <div class="field-group">
+              <label for="authEmail">E-mail</label>
+              <input id="authEmail" name="email" type="email" autocomplete="email" required />
+            </div>
+
+            <div class="field-group">
+              <label for="authPassword">Senha</label>
+              <input id="authPassword" name="password" type="password" autocomplete="current-password" required />
+            </div>
+
+            <div class="field-group" id="confirmField" hidden>
+              <label for="authConfirmPassword">Confirmar senha</label>
+              <input id="authConfirmPassword" name="confirmPassword" type="password" autocomplete="new-password" />
+            </div>
+
+            <p class="form-message" id="authMessage" aria-live="polite"></p>
+
+            <button class="primary-button auth-submit" type="submit" id="authSubmit">
+              <i data-lucide="log-in" aria-hidden="true"></i>
+              Entrar
+            </button>
+          </form>
+        </div>
+      </article>
+    </div>
+
+    <div class="modal-backdrop" id="learningModal" hidden>
+      <article class="panel-modal" role="dialog" aria-modal="true" aria-labelledby="learningTitle">
+        <button class="icon-button modal-close" type="button" id="learningClose" title="Fechar" aria-label="Fechar">
+          <i data-lucide="x" aria-hidden="true"></i>
+        </button>
+        <div class="panel-modal-header">
+          <p class="eyebrow">Conta</p>
+          <h2 id="learningTitle">Seus aprendizados</h2>
+          <p>Continue de onde parou e acesse rapidamente os cursos em que você se matriculou.</p>
+        </div>
+        <div class="learning-stats" id="learningStats"></div>
+        <div class="learning-list" id="learningList"></div>
+      </article>
+    </div>
+
+    <div class="modal-backdrop" id="settingsModal" hidden>
+      <article class="panel-modal settings-modal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+        <button class="icon-button modal-close" type="button" id="settingsClose" title="Fechar" aria-label="Fechar">
+          <i data-lucide="x" aria-hidden="true"></i>
+        </button>
+        <div class="panel-modal-header">
+          <p class="eyebrow">Preferências</p>
+          <h2 id="settingsTitle">Configurações</h2>
+          <p>Ajuste sua experiência de estudo nesta conta.</p>
+        </div>
+
+        <form class="settings-form" id="settingsForm">
+          <div class="field-group">
+            <label for="settingsName">Nome de exibição</label>
+            <input id="settingsName" name="name" type="text" autocomplete="name" />
+          </div>
+
+          <div class="field-group">
+            <label for="settingsEmail">E-mail</label>
+            <input id="settingsEmail" name="email" type="email" disabled />
+          </div>
+
+          <div class="settings-grid">
+            <div class="field-group">
+              <label for="settingsTheme">Tema</label>
+              <select id="settingsTheme" name="theme">
+                <option value="light">Branco</option>
+                <option value="dark">Preto</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label for="settingsDensity">Catálogo</label>
+              <select id="settingsDensity" name="density">
+                <option value="comfortable">Confortável</option>
+                <option value="compact">Compacto</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="settingsGoal">Meta semanal de estudos</label>
+            <select id="settingsGoal" name="goal">
+              <option value="2">2 horas por semana</option>
+              <option value="4">4 horas por semana</option>
+              <option value="6">6 horas por semana</option>
+              <option value="10">10 horas por semana</option>
+            </select>
+          </div>
+
+          <label class="toggle-row">
+            <input id="settingsReminder" name="reminder" type="checkbox" />
+            <span>
+              <strong>Lembrete de estudo</strong>
+              <small>Mostrar lembrete visual para manter a rotina.</small>
+            </span>
+          </label>
+
+          <label class="toggle-row">
+            <input id="settingsAutoplay" name="autoplay" type="checkbox" />
+            <span>
+              <strong>Preferir próxima aula</strong>
+              <small>Ao concluir uma aula, avançar automaticamente para a próxima.</small>
+            </span>
+          </label>
+
+          <p class="form-message" id="settingsMessage" aria-live="polite"></p>
+
+          <button class="primary-button auth-submit" type="submit">
+            <i data-lucide="save" aria-hidden="true"></i>
+            Salvar configurações
+          </button>
+        </form>
+      </article>
+    </div>
+  </body>
+</html>
