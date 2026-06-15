@@ -14,10 +14,19 @@ window.IniciaDevApi = (() => {
 
     const response = await fetch(path, config);
     const contentType = response.headers.get("content-type") || "";
-    const payload = contentType.includes("application/json") ? await response.json() : {};
+    let payload = {};
+
+    if (contentType.includes("application/json")) {
+      try {
+        payload = await response.json();
+      } catch {
+        payload = {};
+      }
+    }
 
     if (!response.ok) {
-      const error = new Error(payload.message || "Não foi possível concluir a ação.");
+      const message = payload?.message || payload?.error || `${response.status} ${response.statusText}`;
+      const error = new Error(message || "Não foi possível concluir a ação.");
       error.status = response.status;
       error.payload = payload;
       throw error;
