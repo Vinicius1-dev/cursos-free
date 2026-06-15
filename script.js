@@ -969,20 +969,26 @@ async function handleAuthSubmit(event) {
       }
 
       syncAfterServerPayload(await api.signup({ name, email, password }));
-      setAuthLoading(false);
       setAuthMessage("Conta criada e salva no banco. Abrindo sua área...", "success");
-      await delay(900);
+      await delay(700);
       closeAuthModal({ keepPendingAction: true });
-      await completePendingAction();
+      try {
+        await completePendingAction();
+      } catch (error) {
+        console.error("Não foi possível concluir a ação pendente após o cadastro.", error);
+      }
       return;
     }
 
     syncAfterServerPayload(await api.login({ email, password }));
-    setAuthLoading(false);
     setAuthMessage("Login confirmado. Abrindo sua área...", "success");
-    await delay(850);
+    await delay(700);
     closeAuthModal({ keepPendingAction: true });
-    await completePendingAction();
+    try {
+      await completePendingAction();
+    } catch (error) {
+      console.error("Não foi possível concluir a ação pendente após o login.", error);
+    }
   } catch (error) {
     setAuthMessage(errorMessage(error, "Não foi possível entrar agora."), "error");
   } finally {

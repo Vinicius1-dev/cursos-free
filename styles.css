@@ -1204,7 +1204,7 @@ button:disabled {
   display: grid;
   grid-template-columns: minmax(260px, 0.85fr) minmax(320px, 1fr);
   width: min(820px, 100%);
-  max-height: min(680px, calc(100vh - 48px));
+  max-height: min(740px, calc(100vh - 48px));
   overflow: hidden;
   background: #fff;
   border-radius: 8px;
@@ -1372,8 +1372,10 @@ button:disabled {
 }
 
 .auth-panel {
-  overflow-y: auto;
+  max-height: min(740px, calc(100vh - 48px));
   padding: 34px;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
 }
 
 .auth-panel h2 {
