@@ -954,20 +954,20 @@ async function handleAuthSubmit(event) {
     return;
   }
 
+  if (mode === "signup" && name.length < 2) {
+    setAuthMessage("Informe seu nome.", "error");
+    return;
+  }
+
+  if (mode === "signup" && password !== confirmPassword) {
+    setAuthMessage("As senhas não conferem.", "error");
+    return;
+  }
+
   setAuthLoading(true);
 
   try {
     if (mode === "signup") {
-      if (name.length < 2) {
-        setAuthMessage("Informe seu nome.", "error");
-        return;
-      }
-
-      if (password !== confirmPassword) {
-        setAuthMessage("As senhas não conferem.", "error");
-        return;
-      }
-
       syncAfterServerPayload(await api.signup({ name, email, password }));
       setAuthMessage("Conta criada e salva no banco. Abrindo sua área...", "success");
       await delay(700);

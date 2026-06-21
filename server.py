@@ -315,7 +315,9 @@ class IniciaDevHandler(SimpleHTTPRequestHandler):
         origin = self.headers.get("Origin")
         if not origin:
             return True
-        return urlparse(origin).netloc == self.headers.get("Host")
+        origin_host = urlparse(origin).netloc.split(":")[0]
+        host = (self.headers.get("Host") or "").split(":")[0]
+        return not host or origin_host == host
 
     def cookie_token(self) -> str | None:
         cookie = SimpleCookie(self.headers.get("Cookie", ""))
