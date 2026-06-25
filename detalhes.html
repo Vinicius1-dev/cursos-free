@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detalhes do curso | IniciaDev</title>
+    <meta name="description" content="Detalhes do curso no IniciaDev com módulos, aulas, vídeo inicial, projeto final e orientação antes da matrícula." />
+    <meta name="theme-color" content="#2557d6" />
+    <link rel="icon" href="data:," />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="styles.css?v=11" />
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="course-data.js?v=11" defer></script>
+    <script src="api-client.js?v=11" defer></script>
+    <script src="course-details.js?v=11" defer></script>
+  </head>
+  <body class="details-page">
+    <header class="lesson-header">
+      <a class="brand" href="index.html#catalogo" aria-label="IniciaDev">
+        <span class="brand-mark">ID</span>
+        <span>IniciaDev</span>
+      </a>
+
+      <nav class="lesson-nav" aria-label="Navegação dos detalhes">
+        <a href="index.html#catalogo">
+          <i data-lucide="arrow-left" aria-hidden="true"></i>
+          Catálogo
+        </a>
+        <span id="detailsUser">Visitante</span>
+      </nav>
+    </header>
+
+    <main class="details-shell" id="detailsShell">
+      <section class="details-hero">
+        <div class="details-hero-media" id="detailsHeroMedia"></div>
+        <div class="details-hero-content">
+          <p class="eyebrow" id="detailsProvider"></p>
+          <h1 id="detailsTitle">Carregando curso...</h1>
+          <p id="detailsDescription"></p>
+          <div class="details-badges" id="detailsBadges"></div>
+          <div class="details-actions" id="detailsActions"></div>
+          <p class="details-message" id="detailsMessage" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <section class="details-layout">
+        <div class="details-main">
+          <section class="details-section" aria-labelledby="overviewTitle">
+            <div class="section-heading compact-heading">
+              <div>
+                <p class="eyebrow">Visão geral</p>
+                <h2 id="overviewTitle">O que você vai entender antes de começar</h2>
+              </div>
+            </div>
+            <div class="outcome-grid" id="outcomeGrid"></div>
+          </section>
+
+          <section class="details-section" aria-labelledby="introVideoTitle">
+            <div class="section-heading compact-heading">
+              <div>
+                <p class="eyebrow">Aula inicial</p>
+                <h2 id="introVideoTitle">Veja o primeiro passo da trilha</h2>
+              </div>
+            </div>
+            <div class="details-video" id="detailsVideo"></div>
+          </section>
+
+          <section class="details-section" aria-labelledby="modulesTitle">
+            <div class="section-heading compact-heading">
+              <div>
+                <p class="eyebrow">Conteúdo</p>
+                <h2 id="modulesTitle">Módulos e aulas</h2>
+              </div>
+              <span class="details-count" id="detailsLessonCount"></span>
+            </div>
+            <div class="details-modules" id="detailsModules"></div>
+          </section>
+
+          <section class="details-section" aria-labelledby="projectTitle">
+            <div class="section-heading compact-heading">
+              <div>
+                <p class="eyebrow">Projeto final</p>
+                <h2 id="projectTitle">O que o aluno entrega no fim</h2>
+              </div>
+            </div>
+            <div class="project-box details-project" id="detailsProject"></div>
+          </section>
+        </div>
+
+        <aside class="details-sidebar" aria-label="Resumo para matrícula">
+          <article class="details-card">
+            <p class="eyebrow">Resumo</p>
+            <div class="details-stat-list" id="detailsStats"></div>
+          </article>
+
+          <article class="details-card">
+            <p class="eyebrow">Como estudar</p>
+            <ul class="details-checklist">
+              <li><i data-lucide="play-circle" aria-hidden="true"></i> Assista à aula curada.</li>
+              <li><i data-lucide="book-open" aria-hidden="true"></i> Leia a explicação guiada.</li>
+              <li><i data-lucide="check-circle" aria-hidden="true"></i> Marque progresso na sala.</li>
+              <li><i data-lucide="folder-kanban" aria-hidden="true"></i> Finalize o projeto prático.</li>
+            </ul>
+          </article>
+
+          <article class="details-card">
+            <p class="eyebrow">Antes de entrar</p>
+            <p id="detailsPrerequisites"></p>
+          </article>
+        </aside>
+      </section>
+    </main>
+
+    <section class="course-not-found" id="detailsNotFound" hidden>
+      <i data-lucide="triangle-alert" aria-hidden="true"></i>
+      <h1>Curso não encontrado</h1>
+      <p>Volte ao catálogo e escolha uma trilha disponível.</p>
+      <a class="primary-button" href="index.html#catalogo">
+        <i data-lucide="arrow-left" aria-hidden="true"></i>
+        Voltar ao catálogo
+      </a>
+    </section>
+  </body>
+</html>

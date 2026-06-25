@@ -541,6 +541,27 @@ function closeAuthModal(options = {}) {
   updateModalLock();
 }
 
+function handleAuthRedirect() {
+  const params = new URLSearchParams(window.location.search);
+  const mode = params.get("auth");
+  if (!mode) return;
+
+  const action = params.get("action");
+  const courseId = params.get("course");
+  if ((action === "enroll" || action === "save") && courseId) {
+    state.pendingCourseAction = { type: action, courseId };
+  }
+
+  const message =
+    action === "enroll"
+      ? "Crie sua conta ou entre para confirmar a matrícula."
+      : action === "save"
+        ? "Entre para salvar este curso."
+        : "";
+  openAuthModal(mode === "login" ? "login" : "signup", message);
+  window.history.replaceState(null, "", `${window.location.pathname}${window.location.hash || ""}`);
+}
+
 function openLearningModal() {
   closeAccountDropdown();
   renderLearningModal();
@@ -586,6 +607,10 @@ function courseProgress(course) {
 
 function coursePageUrl(courseId) {
   return `curso.html?id=${encodeURIComponent(courseId)}`;
+}
+
+function detailsPageUrl(courseId) {
+  return `detalhes.html?id=${encodeURIComponent(courseId)}`;
 }
 
 function openCoursePage(courseId) {
@@ -718,9 +743,9 @@ function updateStudyPlanAccess(pathCourses, nextCourse) {
   if (nextCourse) {
     const nextProgress = courseProgress(nextCourse);
     const nextEnrolled = state.enrolled.has(nextCourse.id);
-    studyPlanPrimary.href = nextEnrolled ? coursePageUrl(nextCourse.id) : "#plano";
+    studyPlanPrimary.href = nextEnrolled ? coursePageUrl(nextCourse.id) : detailsPageUrl(nextCourse.id);
     studyPlanPrimary.dataset.planCourse = nextCourse.id;
-    studyPlanPrimary.dataset.needsEnrollment = String(!nextEnrolled);
+    studyPlanPrimary.dataset.needsEnrollment = "false";
     studyPlanPrimary.innerHTML = `
       <i data-lucide="${nextEnrolled && nextProgress.percent ? "play" : "book-open-check"}" aria-hidden="true"></i>
       ${nextEnrolled ? "Continuar plano" : "Ver detalhes e matricular"}
@@ -754,15 +779,11 @@ function updateStudyPlanAccess(pathCourses, nextCourse) {
             : "Não matriculado";
     }
 
-    if (!isEnrolled && action?.tagName === "A") {
-      const button = document.createElement("button");
-      button.className = action.className;
-      button.type = "button";
-      button.dataset.planCourse = course.id;
-      button.title = "Ver detalhes";
-      button.setAttribute("aria-label", `Ver detalhes de ${course.title}`);
-      button.innerHTML = '<i data-lucide="info" aria-hidden="true"></i>';
-      action.replaceWith(button);
+    if (action?.tagName === "A") {
+      action.href = isEnrolled ? coursePageUrl(course.id) : detailsPageUrl(course.id);
+      action.title = isEnrolled ? "Abrir curso" : "Ver detalhes";
+      action.setAttribute("aria-label", `${isEnrolled ? "Abrir" : "Ver detalhes de"} ${course.title}`);
+      action.innerHTML = `<i data-lucide="${isEnrolled ? "arrow-up-right" : "info"}" aria-hidden="true"></i>`;
     }
   });
 }
@@ -803,10 +824,10 @@ function renderLearningModal() {
                   <h3>${escapeHtml(course.title)}</h3>
                   <p>${escapeHtml(categoryLabels[course.category])} · ${levelLabels[course.level]}</p>
                 </div>
-                <button class="primary-button" type="button" data-learning-course="${course.id}">
+                <a class="primary-button" href="${detailsPageUrl(course.id)}" target="_blank" rel="noopener">
                   <i data-lucide="book-open-check" aria-hidden="true"></i>
                   Ver detalhes
-                </button>
+                </a>
               </article>
             `
           )
@@ -1038,10 +1059,10 @@ function courseCard(course) {
         <i data-lucide="play" aria-hidden="true"></i>
         Continuar
       </a>`
-    : `<button class="primary-button" type="button" data-open-course="${course.id}">
+    : `<a class="primary-button" href="${detailsPageUrl(course.id)}" target="_blank" rel="noopener">
         <i data-lucide="book-open-check" aria-hidden="true"></i>
         Ver detalhes
-      </button>`;
+      </a>`;
 
   return `
     <article class="course-card">
@@ -1223,13 +1244,7 @@ clearSearch.addEventListener("click", () => {
 });
 
 grid.addEventListener("click", async (event) => {
-  const openButton = event.target.closest("[data-open-course]");
   const saveButton = event.target.closest("[data-save-course]");
-
-  if (openButton) {
-    openCourse(openButton.dataset.openCourse);
-    return;
-  }
 
   if (saveButton) {
     await toggleSaved(saveButton.dataset.saveCourse);
@@ -1242,13 +1257,6 @@ studyPlanPrimary.addEventListener("click", (event) => {
 
   event.preventDefault();
   openCourse(courseId);
-});
-
-studyPath.addEventListener("click", (event) => {
-  const planButton = event.target.closest("[data-plan-course]");
-  if (!planButton) return;
-
-  openCourse(planButton.dataset.planCourse);
 });
 
 modalClose.addEventListener("click", closeCourse);
@@ -1360,5 +1368,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   await loadSession();
   updateHeader();
   renderCourses();
+  handleAuthRedirect();
   refreshIcons();
 });
