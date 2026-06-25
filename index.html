@@ -107,9 +107,9 @@
               Comece pela base, avance para projetos e mantenha uma rotina possível de terminar.
             </p>
             <div class="study-plan-actions">
-              <a class="primary-button" id="studyPlanPrimary" href="curso.html?id=logica-programacao" target="_blank" rel="noopener">
-                <i data-lucide="play-circle" aria-hidden="true"></i>
-                Começar pelo primeiro passo
+              <a class="primary-button" id="studyPlanPrimary" href="#catalogo">
+                <i data-lucide="search" aria-hidden="true"></i>
+                Explorar o catálogo
               </a>
               <a class="ghost-button" href="#catalogo">
                 <i data-lucide="search" aria-hidden="true"></i>
@@ -127,12 +127,72 @@
       <section class="catalog-section" id="catalogo" aria-label="Catálogo de cursos">
         <div class="catalog-count-row">
           <div class="catalog-meta" aria-live="polite">
-            <strong id="courseCount">0</strong>
+            <strong id="courseCount">9</strong>
             <span>cursos encontrados</span>
           </div>
         </div>
 
-        <div class="course-grid" id="courseGrid" aria-live="polite"></div>
+        <div class="course-grid" id="courseGrid" aria-live="polite">
+          <article class="course-card">
+            <div class="course-image">
+              <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Lógica de Programação com Projetos" loading="lazy" />
+              <span class="course-badge">Mais escolhido</span>
+            </div>
+            <div class="course-body">
+              <p class="provider">IniciaDev Academy</p>
+              <h3>Lógica de Programação com Projetos</h3>
+              <p>Uma base sólida para quem quer começar a pensar como programador com exercícios guiados.</p>
+            </div>
+            <div class="course-actions">
+              <a class="primary-button" href="curso.html?id=logica-programacao" target="_blank" rel="noopener">Ver detalhes</a>
+            </div>
+          </article>
+
+          <article class="course-card">
+            <div class="course-image">
+              <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="HTML e CSS para Primeiras Páginas" loading="lazy" />
+              <span class="course-badge">Projeto guiado</span>
+            </div>
+            <div class="course-body">
+              <p class="provider">Studio Web Lab</p>
+              <h3>HTML e CSS para Primeiras Páginas</h3>
+              <p>Aprenda a estruturar páginas, criar layouts e publicar um portfólio simples.</p>
+            </div>
+            <div class="course-actions">
+              <a class="primary-button" href="curso.html?id=html-css" target="_blank" rel="noopener">Ver detalhes</a>
+            </div>
+          </article>
+
+          <article class="course-card">
+            <div class="course-image">
+              <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="JavaScript do Zero ao Interativo" loading="lazy" />
+              <span class="course-badge">Com exercícios</span>
+            </div>
+            <div class="course-body">
+              <p class="provider">CodeStart Brasil</p>
+              <h3>JavaScript do Zero ao Interativo</h3>
+              <p>Domine interações, eventos e o básico da linguagem para deixar suas páginas vivas.</p>
+            </div>
+            <div class="course-actions">
+              <a class="primary-button" href="curso.html?id=javascript-zero" target="_blank" rel="noopener">Ver detalhes</a>
+            </div>
+          </article>
+
+          <article class="course-card">
+            <div class="course-image">
+              <img src="https://images.unsplash.com/photo-1526379095098-d400fd0bf935?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Python para Resolver Problemas" loading="lazy" />
+              <span class="course-badge">Popular</span>
+            </div>
+            <div class="course-body">
+              <p class="provider">Data Base School</p>
+              <h3>Python para Resolver Problemas</h3>
+              <p>Use Python para automatizar tarefas e ganhar confiança em pequenos projetos diários.</p>
+            </div>
+            <div class="course-actions">
+              <a class="primary-button" href="curso.html?id=python-iniciantes" target="_blank" rel="noopener">Ver detalhes</a>
+            </div>
+          </article>
+        </div>
       </section>
 
       <section class="how-section" id="como-funciona" aria-labelledby="how-title">
@@ -226,15 +286,21 @@
       <section class="community-section" id="comunidade" aria-labelledby="community-title">
         <div>
           <p class="eyebrow">Comunidade</p>
-          <h2 id="community-title">Aprender fica mais leve com rotina e feedback.</h2>
+          <h2 id="community-title">Aprender fica mais leve com rotina, desafios e feedback.</h2>
           <p>
-            Encontros semanais, revisão de projetos e desafios de portfólio ajudam cada aluno a manter ritmo.
+            Participe de encontros semanais, acompanhe projetos dos colegas e receba um desafio de 15 minutos para manter o ritmo vivo.
           </p>
         </div>
-        <a class="primary-button" href="#catalogo">
-          <i data-lucide="book-open-check" aria-hidden="true"></i>
-          Explorar cursos
-        </a>
+        <div class="study-plan-actions">
+          <a class="primary-button" href="mailto:contato@iniciadev.com?subject=Quero%20participar%20da%20comunidade%20do%20IniciaDev">
+            <i data-lucide="messages-square" aria-hidden="true"></i>
+            Quero participar
+          </a>
+          <a class="ghost-button" href="#catalogo">
+            <i data-lucide="book-open-check" aria-hidden="true"></i>
+            Explorar cursos
+          </a>
+        </div>
       </section>
     </main>
 

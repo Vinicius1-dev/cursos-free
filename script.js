@@ -743,12 +743,14 @@ function updateStudyPlanAccess(pathCourses, nextCourse) {
   if (nextCourse) {
     const nextProgress = courseProgress(nextCourse);
     const nextEnrolled = state.enrolled.has(nextCourse.id);
-    studyPlanPrimary.href = nextEnrolled ? coursePageUrl(nextCourse.id) : detailsPageUrl(nextCourse.id);
-    studyPlanPrimary.dataset.planCourse = nextCourse.id;
+    const isPathStarter = !state.currentUser || !hasPathEnrollment;
+
+    studyPlanPrimary.href = isPathStarter ? "#catalogo" : nextEnrolled ? coursePageUrl(nextCourse.id) : detailsPageUrl(nextCourse.id);
+    studyPlanPrimary.dataset.planCourse = isPathStarter ? "" : nextCourse.id;
     studyPlanPrimary.dataset.needsEnrollment = "false";
     studyPlanPrimary.innerHTML = `
-      <i data-lucide="${nextEnrolled && nextProgress.percent ? "play" : "book-open-check"}" aria-hidden="true"></i>
-      ${nextEnrolled ? "Continuar plano" : "Ver detalhes e matricular"}
+      <i data-lucide="${isPathStarter ? "search" : nextEnrolled && nextProgress.percent ? "play" : "book-open-check"}" aria-hidden="true"></i>
+      ${isPathStarter ? "Explorar o catálogo" : nextEnrolled ? "Continuar plano" : "Ver detalhes e matricular"}
     `;
   }
 
