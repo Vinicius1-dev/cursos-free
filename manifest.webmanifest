@@ -4,8 +4,8 @@
   "description": "Cursos guiados para quem está começando uma nova habilidade.",
   "start_url": "index.html",
   "display": "standalone",
-  "background_color": "#f4f7fb",
-  "theme_color": "#2557d6",
+  "background_color": "#e9f2e8",
+  "theme_color": "#2d6a4f",
   "lang": "pt-BR",
   "icons": []
 }

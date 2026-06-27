@@ -282,6 +282,11 @@ const studyPlanCopy = document.querySelector("#studyPlanCopy");
 const studyPlanPrimary = document.querySelector("#studyPlanPrimary");
 const studyPlanStats = document.querySelector("#studyPlanStats");
 const studyPath = document.querySelector("#studyPath");
+const launchCourseTotal = document.querySelector("#launchCourseTotal");
+const launchLessonTotal = document.querySelector("#launchLessonTotal");
+const launchAreaTotal = document.querySelector("#launchAreaTotal");
+const guideOptions = document.querySelector("#guideOptions");
+const guideResult = document.querySelector("#guideResult");
 const modal = document.querySelector("#courseModal");
 const modalClose = document.querySelector("#modalClose");
 const modalImage = document.querySelector("#modalImage");
@@ -473,6 +478,7 @@ function updateHeader() {
 
   applySettings();
   renderStudyPlan();
+  renderLaunchStats();
   refreshIcons();
 }
 
@@ -614,7 +620,65 @@ function detailsPageUrl(courseId) {
 }
 
 function openCoursePage(courseId) {
-  window.open(coursePageUrl(courseId), "_blank", "noopener");
+  window.location.href = coursePageUrl(courseId);
+}
+
+function renderLaunchStats() {
+  const totalLessons = Object.values(learningPlans).reduce((sum, plan) => sum + (plan.lessons?.length || 0), 0);
+  const totalAreas = new Set(courses.map((course) => course.category)).size;
+
+  if (launchCourseTotal) launchCourseTotal.textContent = courses.length;
+  if (launchLessonTotal) launchLessonTotal.textContent = totalLessons;
+  if (launchAreaTotal) launchAreaTotal.textContent = totalAreas;
+}
+
+function guideReason(course) {
+  const reasons = {
+    fundamentos: "porque dá uma base segura antes de escolher linguagem ou ferramenta.",
+    web: "porque gera resultado visual rápido e ajuda a criar portfólio.",
+    dados: "porque transforma prática em solução de problemas do dia a dia.",
+    ferramentas: "porque organiza seus projetos e deixa seu estudo mais profissional.",
+    backend: "porque mostra como sistemas salvam dados e conversam com outras telas.",
+    ia: "porque ensina a usar ferramentas modernas com método, não só tentativa solta.",
+    marketing: "porque ajuda a entender público, oferta e canais antes de sair postando.",
+    financas: "porque organiza decisões com números reais e metas possíveis.",
+    idiomas: "porque começa por frases úteis e prática simples de rotina.",
+    design: "porque une criação visual com entrega prática para redes e projetos.",
+    concursos: "porque monta uma base de estudo com questões, revisão e constância.",
+    negocios: "porque tira a ideia da cabeça e leva para validação com cliente."
+  };
+
+  return reasons[course.category] || "porque é uma porta de entrada prática para começar com clareza.";
+}
+
+function renderGuideResult(courseId) {
+  const course = courses.find((item) => item.id === courseId);
+  if (!course || !guideResult) return;
+
+  const plan = learningPlans[course.id];
+  const lessons = plan?.lessons?.length || 0;
+  const isEnrolled = state.enrolled.has(course.id);
+  const href = isEnrolled ? coursePageUrl(course.id) : detailsPageUrl(course.id);
+
+  guideOptions?.querySelectorAll("[data-guide-course]").forEach((button) => {
+    button.classList.toggle("active", button.dataset.guideCourse === course.id);
+  });
+
+  guideResult.innerHTML = `
+    <p class="eyebrow">Recomendação inicial</p>
+    <h3>${escapeHtml(course.title)}</h3>
+    <p>Comece por este curso ${guideReason(course)}</p>
+    <div class="guide-result-meta">
+      <span>${escapeHtml(categoryLabels[course.category] || "Curso")}</span>
+      <span>${escapeHtml(levelLabels[course.level] || "Iniciante")}</span>
+      <span>${lessons} aulas</span>
+    </div>
+    <a class="primary-button" href="${href}" ${isEnrolled ? "" : 'target="_blank" rel="noopener"'}>
+      <i data-lucide="${isEnrolled ? "play" : "book-open-check"}" aria-hidden="true"></i>
+      ${isEnrolled ? "Continuar curso" : "Ver detalhes"}
+    </a>
+  `;
+  refreshIcons();
 }
 
 function recommendedPathCourses() {
@@ -653,10 +717,18 @@ function renderStudyPlan() {
 
   if (nextCourse) {
     const nextProgress = courseProgress(nextCourse);
-    studyPlanPrimary.href = `curso.html?id=${encodeURIComponent(nextCourse.id)}`;
+    const nextEnrolled = state.enrolled.has(nextCourse.id);
+    studyPlanPrimary.href = nextEnrolled ? coursePageUrl(nextCourse.id) : detailsPageUrl(nextCourse.id);
+    if (nextEnrolled) {
+      studyPlanPrimary.removeAttribute("target");
+      studyPlanPrimary.removeAttribute("rel");
+    } else {
+      studyPlanPrimary.target = "_blank";
+      studyPlanPrimary.rel = "noopener";
+    }
     studyPlanPrimary.innerHTML = `
       <i data-lucide="${nextProgress.percent ? "play" : "play-circle"}" aria-hidden="true"></i>
-      ${nextProgress.percent ? "Continuar plano" : "Começar pelo primeiro passo"}
+      ${nextEnrolled ? "Continuar plano" : "Ver detalhes do primeiro passo"}
     `;
   }
 
@@ -748,6 +820,13 @@ function updateStudyPlanAccess(pathCourses, nextCourse) {
     studyPlanPrimary.href = isPathStarter ? "#catalogo" : nextEnrolled ? coursePageUrl(nextCourse.id) : detailsPageUrl(nextCourse.id);
     studyPlanPrimary.dataset.planCourse = isPathStarter ? "" : nextCourse.id;
     studyPlanPrimary.dataset.needsEnrollment = "false";
+    if (isPathStarter || nextEnrolled) {
+      studyPlanPrimary.removeAttribute("target");
+      studyPlanPrimary.removeAttribute("rel");
+    } else {
+      studyPlanPrimary.target = "_blank";
+      studyPlanPrimary.rel = "noopener";
+    }
     studyPlanPrimary.innerHTML = `
       <i data-lucide="${isPathStarter ? "search" : nextEnrolled && nextProgress.percent ? "play" : "book-open-check"}" aria-hidden="true"></i>
       ${isPathStarter ? "Explorar o catálogo" : nextEnrolled ? "Continuar plano" : "Ver detalhes e matricular"}
@@ -786,6 +865,13 @@ function updateStudyPlanAccess(pathCourses, nextCourse) {
       action.title = isEnrolled ? "Abrir curso" : "Ver detalhes";
       action.setAttribute("aria-label", `${isEnrolled ? "Abrir" : "Ver detalhes de"} ${course.title}`);
       action.innerHTML = `<i data-lucide="${isEnrolled ? "arrow-up-right" : "info"}" aria-hidden="true"></i>`;
+      if (isEnrolled) {
+        action.removeAttribute("target");
+        action.removeAttribute("rel");
+      } else {
+        action.target = "_blank";
+        action.rel = "noopener";
+      }
     }
   });
 }
@@ -864,7 +950,7 @@ function renderLearningModal() {
               <span style="width: ${progress.percent}%"></span>
             </div>
           </div>
-          <a class="primary-button" href="${coursePageUrl(course.id)}" target="_blank" rel="noopener">
+          <a class="primary-button" href="${coursePageUrl(course.id)}">
             <i data-lucide="play" aria-hidden="true"></i>
             Continuar
           </a>
@@ -1035,6 +1121,7 @@ function visibleCourses() {
 function renderCourses() {
   const list = visibleCourses();
   courseCount.textContent = list.length;
+  renderLaunchStats();
 
   if (!list.length) {
     grid.innerHTML = `
@@ -1057,7 +1144,7 @@ function courseCard(course) {
   const isSaved = state.saved.has(course.id);
   const isEnrolled = state.enrolled.has(course.id);
   const action = isEnrolled
-    ? `<a class="primary-button" href="${coursePageUrl(course.id)}" target="_blank" rel="noopener">
+    ? `<a class="primary-button" href="${coursePageUrl(course.id)}">
         <i data-lucide="play" aria-hidden="true"></i>
         Continuar
       </a>`
@@ -1243,6 +1330,13 @@ clearSearch.addEventListener("click", () => {
   state.search = "";
   renderCourses();
   searchInput.focus();
+});
+
+guideOptions?.addEventListener("click", (event) => {
+  const button = event.target.closest("[data-guide-course]");
+  if (!button) return;
+
+  renderGuideResult(button.dataset.guideCourse);
 });
 
 grid.addEventListener("click", async (event) => {

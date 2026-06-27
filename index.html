@@ -8,7 +8,7 @@
       name="description"
       content="Cursos gratuitos e guiados para começar em programação, IA, marketing, finanças, idiomas, design, concursos e negócios com trilhas, vídeos e prática."
     />
-    <meta name="theme-color" content="#2557d6" />
+    <meta name="theme-color" content="#2d6a4f" />
     <meta property="og:title" content="IniciaDev | Cursos para Começar uma Nova Habilidade" />
     <meta
       property="og:description"
@@ -18,11 +18,11 @@
     <meta property="og:image" content="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=82" />
     <link rel="icon" href="data:," />
     <link rel="manifest" href="manifest.webmanifest" />
-    <link rel="stylesheet" href="styles.css?v=11" />
+    <link rel="stylesheet" href="styles.css?v=18" />
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <script src="course-data.js?v=11" defer></script>
-    <script src="api-client.js?v=11" defer></script>
-    <script src="script.js?v=11" defer></script>
+    <script src="course-data.js?v=18" defer></script>
+    <script src="api-client.js?v=18" defer></script>
+    <script src="script.js?v=18" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#catalogo">Pular para os cursos</a>
@@ -34,6 +34,7 @@
 
       <nav class="main-nav" aria-label="Navegação principal">
         <a href="#plano">Plano</a>
+        <a href="#guia">Guia</a>
         <a href="#catalogo">Catálogo</a>
         <a href="#como-funciona">Como funciona</a>
         <a href="#trilhas">Trilhas</a>
@@ -98,6 +99,25 @@
         </div>
       </section>
 
+      <section class="launch-proof-strip" aria-label="Resumo do IniciaDev">
+        <div>
+          <strong id="launchCourseTotal">16</strong>
+          <span>cursos organizados</span>
+        </div>
+        <div>
+          <strong id="launchLessonTotal">129</strong>
+          <span>aulas em sequência</span>
+        </div>
+        <div>
+          <strong id="launchAreaTotal">12</strong>
+          <span>áreas para começar</span>
+        </div>
+        <div>
+          <strong>0 enrolação</strong>
+          <span>vídeo, leitura e prática</span>
+        </div>
+      </section>
+
       <section class="study-plan-section" id="plano" aria-labelledby="studyPlanTitle">
         <div class="study-plan-panel">
           <div class="study-plan-copy">
@@ -124,6 +144,51 @@
         <div class="study-path" id="studyPath" aria-label="Sequência recomendada"></div>
       </section>
 
+      <section class="guide-section" id="guia" aria-labelledby="guideTitle">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Guia rápido</p>
+            <h2 id="guideTitle">Não sabe por onde começar?</h2>
+          </div>
+          <p class="section-note">Escolha seu objetivo e o IniciaDev indica o primeiro curso mais seguro.</p>
+        </div>
+
+        <div class="guide-panel">
+          <div class="guide-copy">
+            <span class="guide-step">01</span>
+            <h3>Comece com uma decisão simples</h3>
+            <p>
+              Muita gente trava porque tenta estudar tudo ao mesmo tempo. Aqui a pessoa escolhe um objetivo,
+              recebe uma recomendação e entra em uma trilha com começo, prática e continuação.
+            </p>
+            <div class="guide-mini-list" aria-label="Como usar o guia">
+              <span><i data-lucide="mouse-pointer-click" aria-hidden="true"></i> Escolha um objetivo</span>
+              <span><i data-lucide="book-open-check" aria-hidden="true"></i> Veja o curso indicado</span>
+              <span><i data-lucide="play-circle" aria-hidden="true"></i> Comece pela primeira aula</span>
+            </div>
+          </div>
+
+          <div class="guide-workspace">
+            <div class="guide-options" id="guideOptions" aria-label="Objetivos de estudo">
+              <button type="button" data-guide-course="logica-programacao">Quero aprender programação do zero</button>
+              <button type="button" data-guide-course="ia-fundamentos">Quero entender inteligência artificial</button>
+              <button type="button" data-guide-course="marketing-digital-zero">Quero vender ou divulgar online</button>
+              <button type="button" data-guide-course="financas-pessoais">Quero organizar meu dinheiro</button>
+              <button type="button" data-guide-course="ingles-iniciantes">Quero começar inglês</button>
+              <button type="button" data-guide-course="design-edicao-video">Quero criar design e vídeos</button>
+              <button type="button" data-guide-course="concursos-base">Quero estudar para concursos</button>
+              <button type="button" data-guide-course="empreendedorismo-zero">Quero começar um negócio</button>
+            </div>
+
+            <article class="guide-result" id="guideResult" aria-live="polite">
+              <p class="eyebrow">Recomendação inicial</p>
+              <h3>Escolha um objetivo acima</h3>
+              <p>A indicação aparece aqui com o primeiro curso, motivo e próximo passo.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <section class="catalog-section" id="catalogo" aria-label="Catálogo de cursos">
         <div class="catalog-count-row">
           <div class="catalog-meta" aria-live="polite">
@@ -144,7 +209,7 @@
               <p>Uma base sólida para quem quer começar a pensar como programador com exercícios guiados.</p>
             </div>
             <div class="course-actions">
-              <a class="primary-button" href="curso.html?id=logica-programacao" target="_blank" rel="noopener">Ver detalhes</a>
+              <a class="primary-button" href="detalhes.html?id=logica-programacao" target="_blank" rel="noopener">Ver detalhes</a>
             </div>
           </article>
 
@@ -159,7 +224,7 @@
               <p>Aprenda a estruturar páginas, criar layouts e publicar um portfólio simples.</p>
             </div>
             <div class="course-actions">
-              <a class="primary-button" href="curso.html?id=html-css" target="_blank" rel="noopener">Ver detalhes</a>
+              <a class="primary-button" href="detalhes.html?id=html-css" target="_blank" rel="noopener">Ver detalhes</a>
             </div>
           </article>
 
@@ -174,7 +239,7 @@
               <p>Domine interações, eventos e o básico da linguagem para deixar suas páginas vivas.</p>
             </div>
             <div class="course-actions">
-              <a class="primary-button" href="curso.html?id=javascript-zero" target="_blank" rel="noopener">Ver detalhes</a>
+              <a class="primary-button" href="detalhes.html?id=javascript-zero" target="_blank" rel="noopener">Ver detalhes</a>
             </div>
           </article>
 
@@ -189,7 +254,7 @@
               <p>Use Python para automatizar tarefas e ganhar confiança em pequenos projetos diários.</p>
             </div>
             <div class="course-actions">
-              <a class="primary-button" href="curso.html?id=python-iniciantes" target="_blank" rel="noopener">Ver detalhes</a>
+              <a class="primary-button" href="detalhes.html?id=python-iniciantes" target="_blank" rel="noopener">Ver detalhes</a>
             </div>
           </article>
         </div>
@@ -288,18 +353,24 @@
           <p class="eyebrow">Comunidade</p>
           <h2 id="community-title">Aprender fica mais leve com rotina, desafios e feedback.</h2>
           <p>
-            Participe de encontros semanais, acompanhe projetos dos colegas e receba um desafio de 15 minutos para manter o ritmo vivo.
+            Participe da lista inicial da comunidade, acompanhe projetos dos colegas e receba um desafio de 15 minutos para manter o ritmo vivo.
           </p>
         </div>
-        <div class="study-plan-actions">
-          <a class="primary-button" href="mailto:contato@iniciadev.com?subject=Quero%20participar%20da%20comunidade%20do%20IniciaDev">
-            <i data-lucide="messages-square" aria-hidden="true"></i>
-            Quero participar
-          </a>
-          <a class="ghost-button" href="#catalogo">
-            <i data-lucide="book-open-check" aria-hidden="true"></i>
-            Explorar cursos
-          </a>
+        <div class="community-side">
+          <div class="community-challenge">
+            <span>Desafio da semana</span>
+            <strong>Estude 1 aula, faça 1 anotação e entregue 1 prática pequena.</strong>
+          </div>
+          <div class="study-plan-actions">
+            <a class="primary-button" href="mailto:contato@iniciadev.com?subject=Quero%20participar%20da%20comunidade%20do%20IniciaDev">
+              <i data-lucide="messages-square" aria-hidden="true"></i>
+              Quero participar
+            </a>
+            <a class="ghost-button" href="#guia">
+              <i data-lucide="route" aria-hidden="true"></i>
+              Ver guia rápido
+            </a>
+          </div>
         </div>
       </section>
     </main>
@@ -314,6 +385,7 @@
       </div>
       <nav aria-label="Links do rodapé">
         <a href="#plano">Plano</a>
+        <a href="#guia">Guia</a>
         <a href="#catalogo">Catálogo</a>
         <a href="#como-funciona">Como funciona</a>
         <a href="#comunidade">Comunidade</a>

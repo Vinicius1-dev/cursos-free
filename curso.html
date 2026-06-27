@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Curso | IniciaDev</title>
     <meta name="description" content="Sala de aula do IniciaDev com vídeos, leitura guiada, prática e progresso do curso." />
-    <meta name="theme-color" content="#2557d6" />
+    <meta name="theme-color" content="#2d6a4f" />
     <link rel="icon" href="data:," />
     <link rel="manifest" href="manifest.webmanifest" />
-    <link rel="stylesheet" href="styles.css?v=11" />
+    <link rel="stylesheet" href="styles.css?v=18" />
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <script src="course-data.js?v=11" defer></script>
-    <script src="api-client.js?v=11" defer></script>
-    <script src="course-page.js?v=11" defer></script>
+    <script src="course-data.js?v=18" defer></script>
+    <script src="api-client.js?v=18" defer></script>
+    <script src="course-page.js?v=18" defer></script>
   </head>
   <body class="lesson-page">
     <header class="lesson-header">
@@ -52,10 +52,20 @@
             <h2 id="lessonTitle">Aula</h2>
             <p id="lessonObjective"></p>
           </div>
-          <button class="primary-button" type="button" id="completeLessonButton">
-            <i data-lucide="check-circle" aria-hidden="true"></i>
-            Concluir aula
-          </button>
+          <div class="lesson-actions">
+            <button class="ghost-button" type="button" id="prevLessonButton">
+              <i data-lucide="chevron-left" aria-hidden="true"></i>
+              Anterior
+            </button>
+            <button class="ghost-button" type="button" id="nextLessonButton">
+              Próxima
+              <i data-lucide="chevron-right" aria-hidden="true"></i>
+            </button>
+            <button class="primary-button" type="button" id="completeLessonButton">
+              <i data-lucide="check-circle" aria-hidden="true"></i>
+              Concluir aula
+            </button>
+          </div>
         </div>
 
         <section class="reading-panel" aria-labelledby="readingTitle">
@@ -78,16 +88,46 @@
           </a>
         </section>
 
+        <section class="quiz-panel" aria-labelledby="quizTitle">
+          <div class="quiz-heading">
+            <div>
+              <p class="eyebrow">Teste rápido</p>
+              <h2 id="quizTitle">Confira se entendeu</h2>
+            </div>
+            <span>1 pergunta</span>
+          </div>
+          <p id="quizQuestion"></p>
+          <div class="quiz-options" id="quizOptions"></div>
+          <p class="quiz-feedback" id="quizFeedback" aria-live="polite"></p>
+        </section>
+
+        <section class="notes-panel" aria-labelledby="notesTitle">
+          <div>
+            <p class="eyebrow">Anotações</p>
+            <h2 id="notesTitle">Suas ideias desta aula</h2>
+            <p>Escreva dúvidas, exemplos e próximos passos. O texto fica salvo neste navegador.</p>
+          </div>
+          <textarea id="lessonNotes" rows="6" placeholder="Exemplo: hoje eu entendi que algoritmo é uma sequência de passos..."></textarea>
+          <p class="notes-status" id="notesStatus">Pronto para anotar.</p>
+        </section>
+
         <section class="project-workshop" aria-labelledby="projectTitle">
           <div>
-            <p class="eyebrow">Projeto final</p>
+            <p class="eyebrow">Projeto e certificado</p>
             <h2 id="projectTitle">Prática do curso</h2>
             <p id="projectText"></p>
+            <p class="certificate-status" id="certificateStatus"></p>
           </div>
-          <button class="ghost-button" type="button" id="enrollButton">
-            <i data-lucide="bookmark-plus" aria-hidden="true"></i>
-            Matricular-se
-          </button>
+          <div class="project-actions">
+            <button class="ghost-button" type="button" id="certificateButton" disabled>
+              <i data-lucide="award" aria-hidden="true"></i>
+              Certificado
+            </button>
+            <button class="ghost-button" type="button" id="enrollButton">
+              <i data-lucide="bookmark-plus" aria-hidden="true"></i>
+              Matricular-se
+            </button>
+          </div>
         </section>
       </section>
 

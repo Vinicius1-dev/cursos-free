@@ -133,7 +133,7 @@ function renderActions() {
 
   if (enrolled) {
     detailsActions.innerHTML = `
-      <a class="primary-button" href="${coursePageUrl()}" target="_blank" rel="noopener">
+      <a class="primary-button" href="${coursePageUrl()}">
         <i data-lucide="play" aria-hidden="true"></i>
         Continuar curso
       </a>
